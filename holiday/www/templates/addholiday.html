@@ -1,0 +1,38 @@
+<ion-view view-title="Add a Holiday">
+<ion-content>
+<form [formGroup]="form" (ngSubmit)="saveNewHoliday()">
+  <div class="card">
+    <div class="item item-divider">
+    Add a Holiday
+  </div>
+          <ion-list>
+
+        <ion-item>
+          <ion-label>Start Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" formControlName="startdate" pickerFormat="DD MMM YYYY" [(ngModel)]="startDate"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>End Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" formControlName="enddate" pickerFormat="DD MM YYYY" [(ngModel)]="endDate"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Days Taken</ion-label>
+          <ion-input type="number" formControlName="daystaken" [(ngModel)]="daysTaken"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Holiday Approved</ion-label>
+            <ion-toggle color="secondary" formControlName="approved" [(ngModel)]="approved"></ion-toggle>
+        </ion-item>
+
+
+      </ion-list>
+            <button ion-button [disabled]="!form.valid">Add Holiday<ion-icon name="save"></ion-icon></button>
+        
+
+  </div>
+</form>
+</ion-content>
+</ion-view>

@@ -1,0 +1,50 @@
+<ion-view view-title="View">
+<ion-content>
+
+  <div class="card">
+    <div class="item item-divider">
+      View a Holiday
+    </div>
+      <ion-list>
+
+        <ion-item>
+          <ion-label floating>Choose Holiday to View</ion-label>
+          <ion-select [(ngModel)]="editHol">
+      <ion-option value="27-jan">27-jan</ion-option>
+      <ion-option value="n64">Nintendo64</ion-option>
+      <ion-option value="ps">PlayStation</ion-option>
+      <ion-option value="genesis">Sega Genesis</ion-option>
+      <ion-option value="saturn">Sega Saturn</ion-option>
+      <ion-option value="snes">SNES</ion-option>
+    </ion-select>
+        </ion-item>
+      </ion-list>
+  </div>
+
+  <div class="card">
+
+      <ion-list>
+
+        <ion-item>
+          <ion-label floating>Start Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="startDate"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>End Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="endDate"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Days Taken</ion-label>
+          <ion-input type="number" [(ngModel)]="daysTaken"></ion-input>
+        </ion-item>
+
+      </ion-list>
+          {{editHol}}
+      <div padding>
+        </div>
+  </div>
+
+</ion-content>
+</ion-view>

@@ -1,0 +1,38 @@
+<ion-view view-title="Playlists">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
+        {{playlist.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+
+<ion-view view-title="Remove">
+<ion-content>
+
+  <div class="card">
+    <div class="item item-divider">
+      Remove a Holiday
+    </div>
+      <ion-list>
+
+        <ion-item>
+          <ion-label floating>Choose Holiday to Remove</ion-label>
+          <ion-select [(ngModel)]="editHol">
+      <ion-option value="27-jan">27-jan</ion-option>
+      <ion-option value="n64">Nintendo64</ion-option>
+      <ion-option value="ps">PlayStation</ion-option>
+      <ion-option value="genesis">Sega Genesis</ion-option>
+      <ion-option value="saturn">Sega Saturn</ion-option>
+      <ion-option value="snes">SNES</ion-option>
+    </ion-select>
+        </ion-item>
+      </ion-list>
+
+  </div>
+
+
+
+</ion-content>
+</ion-view>
