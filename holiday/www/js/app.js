@@ -39,7 +39,8 @@ angular.module('holiday', ['ionic', 'holiday.controllers', 'holiday.services'])
       url: '/addholiday',
       views: {
         'mainContent': {
-          templateUrl: 'templates/addholiday.html'
+          templateUrl: 'templates/addholiday.html',
+          controller: 'HolidayCtrl'
         }
       }
     })
@@ -58,7 +59,7 @@ angular.module('holiday', ['ionic', 'holiday.controllers', 'holiday.services'])
       views: {
         'mainContent': {
           templateUrl: 'templates/settings.html',
-          controller: ''
+          controller: 'SettingsCtrl'
         }
       }
     })

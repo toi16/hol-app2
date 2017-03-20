@@ -9,7 +9,7 @@
     <ion-col><div>End</div></ion-col>
     <ion-col><div>Days</div></ion-col>
   </ion-row>
-  <ion-row center *ngFor="let item of items" (click)="itemSelected(item)">
+  <ion-row center ngFor="let item of items" (click)="itemSelected(item)">
     <ion-col><div >{{item.startdate | date: "mediumDate"}}</div></ion-col>
     <ion-col><div>{{item.enddate | date: "mediumDate"}}</div></ion-col>
     <ion-col><div>{{item.daystaken}}</div></ion-col>

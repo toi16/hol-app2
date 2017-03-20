@@ -1,21 +1,20 @@
 <ion-view view-title="Holiday Settings">
 <ion-content>
-<form [formGroup]="form" (ngSubmit)="saveNewSettings()">
+<form ng-Submit="saveSettings()">
 <div class="card">
   <div class="item item-divider">
     Holiday Year
   </div>
-    <ion-list>
-    <ion-item>
-      <ion-label>Start Date</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY" formControlName="startdate" [(ngModel)]="setStartDate"></ion-datetime>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>End Date</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY" formControlName="enddate" [(ngModel)]="setEndDate"></ion-datetime>
-    </ion-item>
-    </ion-list>
+    <div class="list">
+      <label class="item item-input">
+      <span class="input-label">Start Date</span>
+      <input type="date" ng-model="settingData.startdate">
+      </label>
+    <label class="item item-input">
+      <span class="input-label">End Date</span>
+      <input type="date" ng-model="settingData.enddate">
+    </label>
+  </div>
 
 </div>
 
@@ -24,22 +23,27 @@
   Holiday Entitlement
 </div>
 
-    <ion-list>
-    <ion-item>
-      <ion-label>Days per year</ion-label>
-      <ion-input type="number" formControlName="holdays" [(ngModel)]="setHolDays"></ion-input>
-    </ion-item>
+    <div class="list">
+    <label class="item item-input">
+      <span class="input-label">Days Per Year</span>
+      <input type="number" ng-Model="settingData.holdays">
+    </label>
 
-    <ion-item>
-      <ion-label>Bank Holiday Days</ion-label>
-      <ion-input type="number" formControlName="bankdays" [(ngModel)]="setBankDays"></ion-input>
-    </ion-item>
+    <label class="item item-input">
+      <span class="input-label">Bank Holiday Days</span>
+      <input type="number" ng-Model="settingData.bankdays">
+    </label>
 
-    <ion-item>
-      <ion-label>Bank Holidays part of Enitlement?</ion-label>
-      <ion-toggle color="secondary" formControlName="bankinc" [(ngModel)]="setBankInc"></ion-toggle>
-    </ion-item>
-    </ion-list>
+    <label class="item item-input">
+      <span class="input-label">Bank Holidays part of Entitlement?</span>
+      <label class="toggle toggle-assertive">
+       <input type="checkbox" ng-Model="settingData.bankinc">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+    </label>
+  </div>
 
 </div>
 
@@ -51,17 +55,18 @@
     <ion-list>
     <ion-item>
       <ion-label>Holiday Entitlement</ion-label>
-
+{{ settingData.holdays + settingData.bankdays }}
     </ion-item>
-{{ entitlement }}
+
 
     </ion-list>
 
 </div>
 
-<ion-buttons>
-      <button ion-button [disabled]="!form.valid">Save Settings<ion-icon name="save"></ion-icon></button>
-    </ion-buttons>
+<label class="item">
+  <button class="button button-block button-positive" type="submit">Save Settings</button>
+</label>
+
 </form>
 
 
