@@ -30,7 +30,8 @@ angular.module('holiday', ['ionic', 'holiday.controllers', 'holiday.services'])
     url: '/home',
     views: {
       'mainContent': {
-        templateUrl: 'templates/home.html'
+        templateUrl: 'templates/home.html',
+        controller: 'SettingsCtrl'
       }
     }
   })
@@ -40,7 +41,7 @@ angular.module('holiday', ['ionic', 'holiday.controllers', 'holiday.services'])
       views: {
         'mainContent': {
           templateUrl: 'templates/addholiday.html',
-          controller: 'HolidayCtrl'
+          controller: 'HolDbCtrl'
         }
       }
     })
@@ -59,7 +60,7 @@ angular.module('holiday', ['ionic', 'holiday.controllers', 'holiday.services'])
       views: {
         'mainContent': {
           templateUrl: 'templates/settings.html',
-          controller: 'SettingsCtrl'
+          controller: 'DbCtrl'
         }
       }
     })
@@ -69,7 +70,7 @@ angular.module('holiday', ['ionic', 'holiday.controllers', 'holiday.services'])
       views: {
         'mainContent': {
           templateUrl: 'templates/viewholiday.html',
-          controller: ''
+          controller: 'HolDbCtrl'
         }
       }
     })

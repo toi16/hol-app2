@@ -43,23 +43,96 @@ angular.module('holiday.controllers', [])
 })
 
 
-.controller('SettingsCtrl', function($scope, $localStorage) {
+.controller('DbCtrl', function($scope) {
 
-  $scope.settingData = $localStorage.getObject('settings','{}');
+  var db = new PouchDB('holsettings');
+  getAppSettings();
 
   $scope.saveSettings = function() {
-    console.log('Saving Settings', $scope.settingData);
-    $localStorage.storeObject('settings',$scope.settingData);
+  db.get('appsettings').then(function(doc) { //get current settings then save with new revision
+  return db.put({
+    _id: 'appsettings',
+    _rev: doc._rev,
+    startdate: $scope.settingData.startdate,
+    enddate: $scope.settingData.enddate,
+    holdays: $scope.settingData.holdays,
+    bankdays: $scope.settingData.bankdays,
+    bankinc: $scope.settingData.bankinc,
+    daysused: $scope.settingData.daysused
+  });
+}).then(function(response) {
+  console.log('data saved');
+}).catch(function (err) {
+  console.log(err);
+});
+}
 
-  };
+function getAppSettings() {
+
+  db.get('appsettings').then(function (doc) {
+    $scope.settingData = doc; //sets settingData to db values.
+    if ($scope.settingData.bankinc = true) {
+      $scope.entitle = $scope.settingData.holdays + $scope.settingData.bankdays;
+    }else {
+      $scope.entitle = $scope.settingData.holdays
+    };
+
+   }).catch(function (err) {
+     console.log(err);
+       var initSettings = {
+       _id: "appsettings",
+       startdate: "2017-03-01",
+       enddate: "2017-12-31",
+       holdays: 20,
+       bankdays: 8,
+       bankinc: "false",
+       daysused: 0
+     };
+
+     db.put(initSettings, function callback(err, result) {
+       if (!err) {
+         console.log('Successfully added default settings');
+       }
+   });
+  });
+}
 })
 
-.controller('HolidayCtrl', function($scope, $localStorage) {
-  $scope.holidayData = $localStorage.getObject('holidays','{}');
+.controller('HolDbCtrl', function($scope) {
 
-  $scope.saveHoliday = function() {
-    console.log('Saving Holiday', $scope.holidayData);
-    $localStorage.storeObject('holidays',$scope.holidayData);
+  var db = new PouchDB('holidayapp');
 
+  $scope.holidayData = {};
+  $scope.selectHols = null;
+  $scope.holidayArray = [];
+  getAllHols();
+  console.log($scope.selectHols);
+
+  $scope.saveNewHol = function() {
+  db.post({
+    startdate: $scope.holidayData.startdate,
+    enddate: $scope.holidayData.enddate,
+    daystaken: $scope.holidayData.daystaken,
+    approved: $scope.holidayData.approved
+
+  }).then(function(response) {
+  console.log('holiday saved');
+}).catch(function (err) {
+  console.log(err);
+});
+}
+
+
+  function getAllHols() {
+    db.allDocs({
+      include_docs: true,
+      attachments: true
+    }).then(function (result) {
+      console.log(result.rows);
+        $scope.holidayArray = result.rows;
+    }).catch(function (err) {
+      console.log(err);
+    });
   };
+
 })

@@ -5,45 +5,38 @@
     <div class="item item-divider">
       View a Holiday
     </div>
-      <ion-list>
+    <div class="list">
 
-        <ion-item>
-          <ion-label floating>Choose Holiday to View</ion-label>
-          <ion-select [(ngModel)]="editHol">
-      <ion-option value="27-jan">27-jan</ion-option>
-      <ion-option value="n64">Nintendo64</ion-option>
-      <ion-option value="ps">PlayStation</ion-option>
-      <ion-option value="genesis">Sega Genesis</ion-option>
-      <ion-option value="saturn">Sega Saturn</ion-option>
-      <ion-option value="snes">SNES</ion-option>
-    </ion-select>
-        </ion-item>
-      </ion-list>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Choose Holiday to View
+          </div>
+          <select ng-model="selectHols" ng-options="item.doc.startdate for item in holidayArray">
+      <option>{{holidayData.startdate}}</option>
+      </select>
+  </label>
+      </div>
   </div>
 
   <div class="card">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Start Date</span>
+      {{holidayData.startdate}}
+      </label>
 
-      <ion-list>
+      <label class="item item-input">
+        <span class="input-label">End Date</span>
+        {{holidayData.enddate}}
+      </label>
 
-        <ion-item>
-          <ion-label floating>Start Date</ion-label>
-          <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="startDate"></ion-datetime>
-        </ion-item>
+      <label class="item item-input">
+        <span class="input-label">Days Taken</span>
+        {{holidayData.daystaken}}
+      </label>
 
-        <ion-item>
-          <ion-label floating>End Date</ion-label>
-          <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="endDate"></ion-datetime>
-        </ion-item>
+    </div>
 
-        <ion-item>
-          <ion-label floating>Days Taken</ion-label>
-          <ion-input type="number" [(ngModel)]="daysTaken"></ion-input>
-        </ion-item>
-
-      </ion-list>
-          {{editHol}}
-      <div padding>
-        </div>
   </div>
 
 </ion-content>

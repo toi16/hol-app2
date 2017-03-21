@@ -9,7 +9,7 @@
     <ion-col><div>End</div></ion-col>
     <ion-col><div>Days</div></ion-col>
   </ion-row>
-  <ion-row center ngFor="let item of items" (click)="itemSelected(item)">
+  <ion-row center ngFor="let item of holidayArray" (click)="itemSelected(item)">
     <ion-col><div >{{item.startdate | date: "mediumDate"}}</div></ion-col>
     <ion-col><div>{{item.enddate | date: "mediumDate"}}</div></ion-col>
     <ion-col><div>{{item.daystaken}}</div></ion-col>
@@ -21,25 +21,25 @@
     <div class="item item-divider">
       Summary
     </div>
-        <ion-row center>
-        <ion-col>Total Days for Year: </ion-col>
-        <ion-col><div>{{totalDays}}</div></ion-col>
-      </ion-row>
+        <div class="row">
+        <div class="col">Total Days for Year: </div>
+        <div class="col">{{settingData.holdays}}</div>
+      </div>
 
-      <ion-row center>
-        <ion-col>Days Booked: </ion-col>
-        <ion-col><div>{{daysBooked}}</div></ion-col>
-      </ion-row>
+      <div class="row">
+        <div class="col">Days Booked: </div>
+        <div class="col">{{daysBooked}}</div>
+      </div>
 
-      <ion-row center>
-        <ion-col>Days Available: </ion-col>
-        <ion-col><div>{{daysAvailable}}</div></ion-col>
-      </ion-row>
+      <div class="row">
+        <div class="col">Days Available: </div>
+        <div class="col">{{daysAvailable}}</div>
+      </div>
 
-      <ion-row center>
-        <ion-col>Days Taken: </ion-col>
-        <ion-col><div>{{daysTaken}}</div></ion-col>
-      </ion-row>
+      <div class="row">
+        <div class="col">Days Taken: </div>
+        <div class="col">{{daysTaken}}</div>
+      </div>
   </div>
 
 
