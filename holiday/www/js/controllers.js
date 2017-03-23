@@ -43,12 +43,42 @@ angular.module('holiday.controllers', [])
 })
 
 
-.controller('DbCtrl', function($scope) {
+.controller('DbCtrl', function($scope, ionicDatePicker) {
 
   var db = new PouchDB('holsettings');
   getAppSettings();
 
+  //ionic date picker
+  var setDate1 = {
+        callback: function (val) {  //Mandatory
+          $scope.settingData.startdate = moment().format("DD MMM YYYY");
+          console.log($scope.settingData.startdate);
+          console.log(new Date(val));
+          },
+        disabledDates: [ ],
+        };
+
+      $scope.openDatePicker1 = function(){
+        ionicDatePicker.openDatePicker(setDate1);
+      };
+
+      var setDate2 = {
+            callback: function (val) {  //Mandatory
+              $scope.settingData.enddate = new Date(val);
+            }
+            };
+
+          $scope.openDatePicker2 = function(){
+            ionicDatePicker.openDatePicker(setDate2);
+          };
+
   $scope.saveSettings = function() {
+
+    var a = moment($scope.settingData.startdate);
+    var b = moment($scope.settingData.enddate);
+    var c = moment().weekdayCalc($scope.settingData.enddate,$scope.settingData.startdate,[1,2,3,4,5]);
+    console.log(c);
+
   db.get('appsettings').then(function(doc) { //get current settings then save with new revision
   return db.put({
     _id: 'appsettings',
@@ -98,7 +128,7 @@ function getAppSettings() {
 }
 })
 
-.controller('HolDbCtrl', function($scope) {
+.controller('HolDbCtrl', function($scope, ionicDatePicker, $ionicModal) {
 
   var db = new PouchDB('holidayapp');
 
@@ -107,6 +137,49 @@ function getAppSettings() {
   $scope.holidayArray = [];
   getAllHols();
   console.log($scope.selectHols);
+
+  // Create the login modal that we will use later
+  $ionicModal.fromTemplateUrl('templates/addholiday.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  // Triggered in the login modal to close it
+  $scope.closeAddHol = function() {
+    $scope.modal.hide();
+  };
+
+  // Open the login modal
+  $scope.openAddHol = function() {
+    $scope.modal.show();
+  };
+
+
+  var setDate1 = {
+        callback: function (val) {  //Mandatory
+          $scope.holidayData.startdate = moment().format("DD MMM YYYY");
+        }
+        };
+
+      $scope.openDatePicker1 = function(){
+        ionicDatePicker.openDatePicker(setDate1);
+      };
+
+  var setDate2 = {
+        callback: function (val) {  //Mandatory
+          $scope.holidayData.enddate = moment().format("DD MMM YYYY");
+          $scope.calcDays(); //calculate days taken
+        }
+        };
+
+      $scope.openDatePicker2 = function(){
+        ionicDatePicker.openDatePicker(setDate2);
+      };
+
+      $scope.calcDays = function(){
+      $scope.holidayData.daystaken = moment().weekdayCalc($scope.holidayData.enddate,$scope.holidayData.startdate,[1,2,3,4,5]) + 1;
+    };
 
   $scope.saveNewHol = function() {
   db.post({
@@ -117,6 +190,12 @@ function getAppSettings() {
 
   }).then(function(response) {
   console.log('holiday saved');
+    $scope.holidayData.startdate = "click here to add a date";
+    $scope.holidayData.enddate = "Click here to add a date";
+    $scope.holidayData.daystaken = 0;
+    $scope.holidayData.approved = false;
+    $scope.closeAddHol();
+
 }).catch(function (err) {
   console.log(err);
 });

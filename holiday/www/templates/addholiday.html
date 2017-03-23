@@ -1,25 +1,27 @@
-<ion-view view-title="Add a Holiday">
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add a Holiday</h1>
+    <div class="buttons">
+      <button class="button button-positive" ng-click="closeAddHol()">Close</button>
+    </div>
+  </ion-header-bar>
 <ion-content>
 <form ng-Submit="saveNewHol()">
   <div class="card">
-    <div class="item item-divider">
-    Add a Holiday
-  </div>
-
-      <div class="list">
+        <div class="list">
         <label class="item item-input">
           <span class="input-label">Start Date</span>
-          <input type="date" ng-Model="holidayData.startdate">
+          <input type="text" placeholder="click here to enter a date" ng-click="openDatePicker1();" ng-Model="holidayData.startdate">
         </label>
 
         <label class="item item-input">
           <span class="input-label">End Date</span>
-          <input type="date" ng-Model="holidayData.enddate">
+          <input type="text" placeholder="click here to enter a date" ng-click="openDatePicker2();" ng-Model="holidayData.enddate">
         </label>
 
         <label class="item item-input">
           <span class="input-label">Days Taken</span>
-          <input type="number" ng-Model="holidayData.daystaken">
+          <input type="number" disabled="true" ng-Model="holidayData.daystaken">
         </label>
 
         <label class="item item-input">
@@ -41,4 +43,4 @@
   </div>
 </form>
 </ion-content>
-</ion-view>
+</ion-modal-view>
