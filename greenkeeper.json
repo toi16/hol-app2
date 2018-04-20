@@ -1,0 +1,15 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "holiday/package.json",
+        "holiday/www/lib/angular-animate/package.json",
+        "holiday/www/lib/angular-sanitize/package.json",
+        "holiday/www/lib/angular/package.json",
+        "holiday/www/lib/ionic-datepicker/package.json",
+        "holiday/www/lib/moment-weekday-calc/example/package.json",
+        "holiday/www/lib/moment-weekday-calc/package.json"
+      ]
+    }
+  }
+}
